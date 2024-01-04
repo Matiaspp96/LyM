@@ -57,9 +57,9 @@ export default function Component() {
   return (
     <main className="min-h-screen bg-gradient-to-r from-pink-200 via-purple-200 to-blue-200 dark:bg-gray-800 overflow-hidden relative">
       <div className="absolute w-full h-full overflow-hidden">
-        <div className="animate-bubble1 w-64 h-64 bg-pink-300 rounded-full absolute -top-32 -left-16" />
-        <div className="animate-bubble2 w-48 h-48 bg-purple-300 rounded-full absolute top-1/2 left-1/4" />
-        <div className="animate-bubble3 w-72 h-72 bg-blue-300 rounded-full absolute bottom-0 right-0" />
+        <div className="animate-blob animation-delay-2000 mix-blend-multiply filter blur-xl opacity-50 w-64 h-64 bg-pink-300 rounded-full absolute -top-32 -left-16" />
+        <div className="animate-blob3 w-60 h-60 mix-blend-multiply filter blur-2xl opacity-50 bg-purple-300 rounded-full absolute top-1/3 left-1/4" />
+        <div className="animate-blob2 animation-delay-1000 mix-blend-multiply filter blur-xl opacity-50 w-72 h-72 bg-blue-300 rounded-full absolute bottom-0 right-0" />
       </div>
       <section className="w-full max-w-7xl mx-auto px-6 py-12 relative z-10">
         <div className="grid gap-6">
@@ -76,18 +76,18 @@ export default function Component() {
               <Articles {...article} />
             ))}
           </div>
-          <div className="mt-10 w-1/4 mx-auto">
-            <h2 className="text-2xl font-bold text-center">Top 3 Donors</h2>
-            <div className="mt-6 grid gap-6 md:grid-cols-1">
-              <div className="flex items-center justify-center bg-white dark:bg-gray-800 p-3 rounded-lg shadow">
+          <div className="mt-10 md:w-1/4 mx-auto">
+            <h2 className="text-2xl font-bold text-center">Top 3 Donadores</h2>
+            <div className="mt-6 flex flex-col w-full md:grid gap-6 md:grid-cols-1">
+              <div className="flex items-center justify-start gap-2 bg-white dark:bg-gray-800 p-3 rounded-lg shadow">
                 <p className="text-gray-500 dark:text-gray-400">🥇</p>
                 <h3 className="text-lg font-semibold">John Doe</h3>
               </div>
-              <div className="flex items-center justify-center bg-white dark:bg-gray-800 p-3 rounded-lg shadow">
+              <div className="flex items-center justify-start gap-2 bg-white dark:bg-gray-800 p-3 rounded-lg shadow">
                 <p className="text-gray-500 dark:text-gray-400">🥈</p>
                 <h3 className="text-lg font-semibold">Jane Smith</h3>
               </div>
-              <div className="flex items-center justify-center bg-white dark:bg-gray-800 p-3 rounded-lg shadow">
+              <div className="flex items-center justify-start gap-2 bg-white dark:bg-gray-800 p-3 rounded-lg shadow">
                 <p className="text-gray-500 dark:text-gray-400">🥉</p>
                 <h3 className="text-lg font-semibold">Robert Johnson</h3>
               </div>
