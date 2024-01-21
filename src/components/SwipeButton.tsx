@@ -74,7 +74,7 @@ export const SwipeButton: React.FC<SwipeButtonProps> = ({
 
   return (
     <motion.div
-      className="flex items-center justify-start h-16 w-80 rounded-full overflow-hidden mx-auto"
+      className="max-sm:flex items-center justify-start h-16 w-80 rounded-full overflow-hidden mx-auto"
       ref={constraintsRef}
       animate={{
         backgroundColor: interpolateColor("#FF69B4", "#4682B4", progress),
