@@ -93,7 +93,7 @@ const Articles: React.FC<ArticlesProps> = (props) => {
           </DrawerTrigger>
           <DrawerContent>
             <DrawerHeader className="md:w-1/2 mx-auto md:text-center">
-              <div className="flex flex-col items-center justify-center space-x-2 mx-6 md:w-2/3 md:mx-auto">
+              <div className="flex flex-col items-center justify-center space-x-2 mx-10 md:w-2/3 md:mx-auto">
                 <Input
                   placeholder="Deja tu nombre (Opcional)"
                   className="text-xl font-bold tracking-tighter border md:w-1/2 md:mx-auto border-slate-600 py-2 focus:ring-ring focus:ring-1 placeholder:font-normal  text-center"
@@ -101,38 +101,7 @@ const Articles: React.FC<ArticlesProps> = (props) => {
                   onChange={(e) => setContributionName(e.target.value)}
                 />
               </div>
-              <DrawerTitle className="text-lg font-semibold">
-                ¡Gracias!
-              </DrawerTitle>
-              <DrawerDescription className="text-sm">
-                Tu contribución nos ayudará a comprar los artefactos para
-                nuestro nuevo hogar.
-              </DrawerDescription>
-              <div className="flex items-center justify-center flex-col gap-2">
-                <p className="text-sm font-semibold">Alias: matiaspalomo.bru</p>
-                <p className="text-sm font-semibold">
-                  CBU: 1430001713018570320011
-                </p>
-                <img
-                  className="w-48 h-48 border border-primary rounded-lg p-2"
-                  src="/qr1.png"
-                  alt="QR"
-                />
-              </div>
-              <p className="text-sm font-semibold text-center">
-                Resta contribuir: ${difference}
-              </p>
-              <Progress
-                value={((contribution + recaudado) / precioObjetivo) * 100}
-                className="max-md:w-2/3 md:w-1/2 mx-auto"
-              />
-              <span className="text-sm font-semibold text-center">
-                ${contribution + recaudado} / ${precioObjetivo} -{" "}
-                {((contribution + recaudado) / precioObjetivo) * 100}%
-              </span>
-            </DrawerHeader>
-            <div className="mb-2 md:w-1/2 md:mx-auto">
-              <div className="flex items-center justify-center space-x-2">
+              <div className="mb-2 md:w-1/2 md:mx-auto flex items-center justify-center space-x-2">
                 <Button
                   variant="outline"
                   size="icon"
@@ -172,7 +141,37 @@ const Articles: React.FC<ArticlesProps> = (props) => {
                   <PlusIcon className="h-4 w-4" />
                 </Button>
               </div>
-            </div>
+              <DrawerTitle className="text-lg font-semibold">
+                ¡Gracias!
+              </DrawerTitle>
+              <DrawerDescription className="text-sm">
+                Tu contribución nos ayudará a comprar los artefactos para
+                nuestro nuevo hogar.
+              </DrawerDescription>
+              <div className="flex items-center justify-center flex-col gap-2">
+                <p className="text-sm font-semibold">Alias: matiaspalomo.bru</p>
+                <p className="text-sm font-semibold">
+                  CBU: 1430001713018570320011
+                </p>
+                <img
+                  className="w-48 h-48 border border-primary rounded-lg p-2"
+                  src="/qr1.png"
+                  alt="QR"
+                />
+              </div>
+              <p className="text-sm font-semibold text-center">
+                Resta contribuir: ${difference}
+              </p>
+              <Progress
+                value={((contribution + recaudado) / precioObjetivo) * 100}
+                className="max-md:w-2/3 md:w-1/2 mx-auto"
+              />
+              <span className="text-sm font-semibold text-center">
+                ${contribution + recaudado} / ${precioObjetivo} -{" "}
+                {((contribution + recaudado) / precioObjetivo) * 100}%
+              </span>
+            </DrawerHeader>
+
             <DrawerFooter className="md:w-1/2 md:mx-auto">
               <Button
                 onClick={() => {
@@ -183,11 +182,11 @@ const Articles: React.FC<ArticlesProps> = (props) => {
                     }
                   );
                 }}
-                // className="hidden md:block"
+                className="hidden md:block"
               >
                 Enviar
               </Button>
-              {/* <SwipeButton
+              <SwipeButton
                 id={id}
                 contribution={contribution}
                 contributionName={contributionName}
@@ -195,7 +194,7 @@ const Articles: React.FC<ArticlesProps> = (props) => {
                 setContribution={setContribution}
                 setOpen={setOpen}
                 onOnce={onOnce}
-              /> */}
+              />
               <DrawerClose>Cancelar</DrawerClose>
             </DrawerFooter>
           </DrawerContent>
