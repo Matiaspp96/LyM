@@ -93,6 +93,14 @@ const Articles: React.FC<ArticlesProps> = (props) => {
           </DrawerTrigger>
           <DrawerContent>
             <DrawerHeader className="md:w-1/2 mx-auto md:text-center">
+              <div className="flex flex-col items-center justify-center space-x-2 mx-6 md:w-2/3 md:mx-auto">
+                <Input
+                  placeholder="Deja tu nombre (Opcional)"
+                  className="text-xl font-bold tracking-tighter border md:w-1/2 md:mx-auto border-slate-600 py-2 focus:ring-ring focus:ring-1 placeholder:font-normal  text-center"
+                  value={contributionName}
+                  onChange={(e) => setContributionName(e.target.value)}
+                />
+              </div>
               <DrawerTitle className="text-lg font-semibold">
                 ¡Gracias!
               </DrawerTitle>
@@ -122,14 +130,6 @@ const Articles: React.FC<ArticlesProps> = (props) => {
                 ${contribution + recaudado} / ${precioObjetivo} -{" "}
                 {((contribution + recaudado) / precioObjetivo) * 100}%
               </span>
-              <div className="flex flex-col items-center justify-center space-x-2 mx-6 md:w-2/3 md:mx-auto">
-                <Input
-                  placeholder="Deja tu nombre (Opcional)"
-                  className="text-xl font-bold tracking-tighter border md:w-1/2 md:mx-auto border-slate-600 py-2 focus:ring-ring focus:ring-1 placeholder:font-normal  text-center"
-                  value={contributionName}
-                  onChange={(e) => setContributionName(e.target.value)}
-                />
-              </div>
             </DrawerHeader>
             <div className="mb-2 md:w-1/2 md:mx-auto">
               <div className="flex items-center justify-center space-x-2">
