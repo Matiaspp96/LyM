@@ -173,7 +173,7 @@ const Articles: React.FC<ArticlesProps> = (props) => {
                 </Button>
               </div>
             </div>
-            <DrawerFooter className="md:w-1/2 md:mx-auto -z-10">
+            <DrawerFooter className="md:w-1/2 md:mx-auto">
               <Button
                 onClick={() => {
                   sendDonation(id, targetContribution, contributionName).then(
@@ -183,11 +183,11 @@ const Articles: React.FC<ArticlesProps> = (props) => {
                     }
                   );
                 }}
-                className="hidden md:block"
+                // className="hidden md:block"
               >
                 Enviar
               </Button>
-              <SwipeButton
+              {/* <SwipeButton
                 id={id}
                 contribution={contribution}
                 contributionName={contributionName}
@@ -195,7 +195,7 @@ const Articles: React.FC<ArticlesProps> = (props) => {
                 setContribution={setContribution}
                 setOpen={setOpen}
                 onOnce={onOnce}
-              />
+              /> */}
               <DrawerClose>Cancelar</DrawerClose>
             </DrawerFooter>
           </DrawerContent>
