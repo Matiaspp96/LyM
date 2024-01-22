@@ -96,7 +96,7 @@ const Articles: React.FC<ArticlesProps> = (props) => {
               <div className="flex flex-col items-center justify-center space-x-2 mx-10 md:w-2/3 md:mx-auto">
                 <Input
                   placeholder="Deja tu nombre (Opcional)"
-                  className="text-xl font-bold tracking-tighter border md:w-1/2 md:mx-auto border-slate-600 py-2 focus:ring-ring focus:ring-1 placeholder:font-normal  text-center"
+                  className="text-xl font-bold tracking-tighter border md:w-2/3 md:mx-auto border-slate-600 py-2 focus:ring-ring focus:ring-1 placeholder:font-normal  text-center"
                   value={contributionName}
                   onChange={(e) => setContributionName(e.target.value)}
                 />
@@ -118,7 +118,7 @@ const Articles: React.FC<ArticlesProps> = (props) => {
                 </Button>
                 <div className="flex-1 text-center">
                   <Input
-                    className="text-7xl font-bold tracking-tighter border md:w-1/2 md:mx-auto border-slate-600 text-center py-0 focus:ring-ring focus:ring-1"
+                    className="text-7xl font-bold tracking-tighter border md:w-full md:mx-auto border-slate-600 text-center py-0 focus:ring-ring focus:ring-1"
                     value={targetContribution}
                     onChange={(e) => setTargetContribution(+e.target.value)}
                   />
@@ -141,36 +141,38 @@ const Articles: React.FC<ArticlesProps> = (props) => {
                   <PlusIcon className="h-4 w-4" />
                 </Button>
               </div>
-              <DrawerTitle className="text-lg font-semibold">
-                ¡Gracias!
-              </DrawerTitle>
-              <DrawerDescription className="text-sm">
+            </DrawerHeader>
+            <DrawerDescription className="text-sm flex flex-col">
+              <p className="text-center font-semibold text-lg">
+                ¡Muchas gracias!
+              </p>
+              <p className="text-center mx-10">
                 Tu contribución nos ayudará a comprar los artefactos para
                 nuestro nuevo hogar.
-              </DrawerDescription>
-              <div className="flex items-center justify-center flex-col gap-2">
-                <p className="text-sm font-semibold">Alias: matiaspalomo.bru</p>
-                <p className="text-sm font-semibold">
-                  CBU: 1430001713018570320011
-                </p>
-                <img
-                  className="w-48 h-48 border border-primary rounded-lg p-2"
-                  src="/qr1.png"
-                  alt="QR"
-                />
-              </div>
-              <p className="text-sm font-semibold text-center">
-                Resta contribuir: ${difference}
               </p>
-              <Progress
-                value={((contribution + recaudado) / precioObjetivo) * 100}
-                className="max-md:w-2/3 md:w-1/2 mx-auto"
+            </DrawerDescription>
+            <div className="flex items-center justify-center flex-col gap-2 mt-4">
+              <p className="text-sm font-semibold">Alias: luzorrillo</p>
+              <p className="text-sm font-semibold">
+                CBU: 1430001713028873250016
+              </p>
+              <img
+                className="w-48 h-48 border border-primary rounded-lg p-2"
+                src="/qr1.png"
+                alt="QR"
               />
-              <span className="text-sm font-semibold text-center">
-                ${contribution + recaudado} / ${precioObjetivo} -{" "}
-                {((contribution + recaudado) / precioObjetivo) * 100}%
-              </span>
-            </DrawerHeader>
+            </div>
+            <p className="text-sm font-semibold text-center">
+              Resta contribuir: ${difference}
+            </p>
+            <Progress
+              value={((contribution + recaudado) / precioObjetivo) * 100}
+              className="max-md:w-2/3 md:w-1/2 mx-auto"
+            />
+            <span className="text-sm font-semibold text-center">
+              ${contribution + recaudado} / ${precioObjetivo} -{" "}
+              {((contribution + recaudado) / precioObjetivo) * 100}%
+            </span>
 
             <DrawerFooter className="md:w-1/2 md:mx-auto">
               <Button
