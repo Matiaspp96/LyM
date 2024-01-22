@@ -173,7 +173,7 @@ const Articles: React.FC<ArticlesProps> = (props) => {
                 </Button>
               </div>
             </div>
-            <DrawerFooter className="md:w-1/2 md:mx-auto">
+            <DrawerFooter className="md:w-1/2 md:mx-auto -z-10">
               <Button
                 onClick={() => {
                   sendDonation(id, targetContribution, contributionName).then(

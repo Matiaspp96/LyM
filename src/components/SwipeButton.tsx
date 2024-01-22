@@ -82,14 +82,14 @@ export const SwipeButton: React.FC<SwipeButtonProps> = ({
     >
       <span
         className={cn(
-          "absolute text-2xl font-bold z-0 left-1/2 transform -translate-x-1/2",
+          "absolute text-2xl font-bold left-1/2 transform -translate-x-1/2",
           swipedToEnd ? "text-slate-100" : "text-slate-100"
         )}
       >
         {swipedToEnd ? "¡Gracias!" : "Enviar"}
       </span>
       <motion.div
-        className="flex items-center justify-center w-16 h-16 bg-slate-100 rounded-full z-10"
+        className="flex items-center justify-center w-16 h-16 bg-slate-100 rounded-full"
         drag="x"
         dragControls={controls}
         dragConstraints={constraintsRef}
