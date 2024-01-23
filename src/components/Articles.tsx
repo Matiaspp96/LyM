@@ -1,12 +1,19 @@
+import api from "@/api/api";
 import {
-  CardTitle,
-  CardDescription,
-  CardHeader,
-  CardContent,
-  CardFooter,
   Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
 } from "@/components/ui/card";
-import { Progress } from "./ui/progress";
+import { cn } from "@/lib/utils";
+import { Product } from "@/types/types";
+import { MinusIcon, PlusIcon } from "@radix-ui/react-icons";
+import { useEffect, useState } from "react";
+import Pride from "react-canvas-confetti/dist/presets/pride";
+import { TConductorInstance } from "react-canvas-confetti/dist/types";
+import { SwipeButton } from "./SwipeButton";
 import { Button } from "./ui/button";
 import {
   Drawer,
@@ -15,18 +22,11 @@ import {
   DrawerDescription,
   DrawerFooter,
   DrawerHeader,
-  DrawerTitle,
   DrawerTrigger,
 } from "./ui/drawer";
-import { MinusIcon, PlusIcon } from "@radix-ui/react-icons";
-import { useEffect, useState } from "react";
 import { Input } from "./ui/input";
-import { cn } from "@/lib/utils";
-import { Product } from "@/types/types";
-import api from "@/api/api";
-import { SwipeButton } from "./SwipeButton";
-import Pride from "react-canvas-confetti/dist/presets/pride";
-import { TConductorInstance } from "react-canvas-confetti/dist/types";
+import { Progress } from "./ui/progress";
+import { Badge } from "./ui/badge";
 
 interface ArticlesProps extends Product {}
 
@@ -45,6 +45,7 @@ const Articles: React.FC<ArticlesProps> = (props) => {
   const onInit = ({ conductor }: { conductor: TConductorInstance }) => {
     setConductor(conductor);
   };
+  const [soldOut, setSoldOut] = useState(false);
 
   const onOnce = () => {
     conductor?.run({ speed: 30, duration: 1200 });
@@ -58,13 +59,28 @@ const Articles: React.FC<ArticlesProps> = (props) => {
     // Si la diferencia es menor o igual al umbral, actualiza el targetContribution
     setDifference(diferencia);
   }, [contribution, recaudado, precioObjetivo]);
+
+  useEffect(() => {
+    if (contribution + recaudado >= precioObjetivo) {
+      setSoldOut(true);
+    }
+  }, [contribution, recaudado, precioObjetivo]);
+
   return (
-    <Card className="max-w-md p-6 grid gap-6">
-      <CardHeader className="items-center space-y-2 gap-4 p-0">
-        <div className="grid gap-1 text-center">
-          <CardTitle className="text-lg">{producto}</CardTitle>
-          <CardDescription className="text-xs">{descripcion}</CardDescription>
-        </div>
+    <Card
+      className={cn(
+        "max-w-md p-6 grid gap-6 relative",
+        soldOut && "opacity-50"
+      )}
+    >
+      {soldOut && (
+        <Badge className="absolute top-[30px] -left-2 w-auto h-5 bg-sky-500 z-10">
+          Alcanzado
+        </Badge>
+      )}
+      <CardHeader className="items-center space-y-2 p-0 grid text-center">
+        <CardTitle className="text-lg">{producto}</CardTitle>
+        <CardDescription className="text-xs">{descripcion}</CardDescription>
       </CardHeader>
       <CardContent className="p-0 grid gap-4">
         <div className="flex items-center gap-4 text-sm mx-auto h-auto md:h-80">
@@ -76,9 +92,23 @@ const Articles: React.FC<ArticlesProps> = (props) => {
         </div>
         <div className="flex items-center gap-4 text-sm flex-col">
           <div className="flex justify-between w-full">
-            <div className="font-medium">Objetivo: ${precioObjetivo}</div>
             <div className="font-medium">
-              Recaudado: ${contribution + recaudado}
+              Objetivo{" "}
+              <Badge
+                variant={"outline"}
+                className="border-purple-600/50 rounded-full"
+              >
+                ${precioObjetivo}
+              </Badge>
+            </div>
+            <div className="font-medium">
+              Recaudado{" "}
+              <Badge
+                variant={"outline"}
+                className="border-rose-600/50 rounded-full"
+              >
+                ${contribution + recaudado}
+              </Badge>
             </div>
           </div>
           <Progress
@@ -87,21 +117,23 @@ const Articles: React.FC<ArticlesProps> = (props) => {
         </div>
       </CardContent>
       <CardFooter className="text-xs p-0 justify-center">
-        <Drawer open={open} onOpenChange={setOpen}>
+        <Drawer open={open && !soldOut} onOpenChange={setOpen}>
           <DrawerTrigger asChild>
-            <Button size="default">Contribuir</Button>
+            <Button size="default" className={soldOut ? "" : ""}>
+              {soldOut ? "Objetivo alcanzado" : "Contribuir"}
+            </Button>
           </DrawerTrigger>
           <DrawerContent>
-            <DrawerHeader className="md:w-1/2 mx-auto md:text-center">
-              <div className="flex flex-col items-center justify-center space-x-2 mx-10 md:w-2/3 md:mx-auto">
+            <DrawerHeader className="mx-auto md:text-center gap-4">
+              <div className="flex flex-col items-center justify-center space-x-2 md:w-[620px] mx-auto">
                 <Input
                   placeholder="Deja tu nombre (Opcional)"
-                  className="text-xl font-bold tracking-tighter border md:w-2/3 md:mx-auto border-slate-600 py-2 focus:ring-ring focus:ring-1 placeholder:font-normal  text-center"
+                  className="text-xl font-bold tracking-tighter border md:mx-auto border-slate-600 py-2 focus:ring-ring focus:ring-1 placeholder:font-normal  text-center"
                   value={contributionName}
                   onChange={(e) => setContributionName(e.target.value)}
                 />
               </div>
-              <div className="mb-2 md:w-1/2 md:mx-auto flex items-center justify-center space-x-2">
+              <div className="mb-2 md:w-2/3 md:mx-auto flex items-center justify-center space-x-2">
                 <Button
                   variant="outline"
                   size="icon"
@@ -121,6 +153,8 @@ const Articles: React.FC<ArticlesProps> = (props) => {
                     className="text-7xl font-bold tracking-tighter border md:w-full md:mx-auto border-slate-600 text-center py-0 focus:ring-ring focus:ring-1"
                     value={targetContribution}
                     onChange={(e) => setTargetContribution(+e.target.value)}
+                    type="number"
+                    min="0"
                   />
                   <div className="text-[0.70rem] uppercase text-muted-foreground">
                     Pesos
@@ -142,16 +176,16 @@ const Articles: React.FC<ArticlesProps> = (props) => {
                 </Button>
               </div>
             </DrawerHeader>
-            <DrawerDescription className="text-sm flex flex-col">
-              <p className="text-center font-semibold text-lg">
+            <DrawerDescription className="flex flex-col">
+              <span className="text-center font-semibold text-lg text-gray-950">
                 ¡Muchas gracias!
-              </p>
-              <p className="text-center mx-10">
+              </span>
+              <span className="text-center mx-10">
                 Tu contribución nos ayudará a comprar los artefactos para
                 nuestro nuevo hogar.
-              </p>
+              </span>
             </DrawerDescription>
-            <div className="flex items-center justify-center flex-col gap-2 mt-4">
+            <div className="flex items-center justify-center flex-col gap-2 my-4">
               <p className="text-sm font-semibold">Alias: luzorrillo</p>
               <p className="text-sm font-semibold">
                 CBU: 1430001713028873250016
@@ -167,7 +201,7 @@ const Articles: React.FC<ArticlesProps> = (props) => {
             </p>
             <Progress
               value={((contribution + recaudado) / precioObjetivo) * 100}
-              className="max-md:w-2/3 md:w-1/2 mx-auto"
+              className="max-md:w-80 md:w-1/2 mx-auto"
             />
             <span className="text-sm font-semibold text-center">
               ${contribution + recaudado} / ${precioObjetivo} -{" "}
