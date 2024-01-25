@@ -178,23 +178,20 @@ const Articles: React.FC<ArticlesProps> = (props) => {
             </DrawerHeader>
             <DrawerDescription className="flex flex-col">
               <span className="text-center font-semibold text-lg text-gray-950">
-                ¡Muchas gracias!
+                ¡Muchas gracias!❤️
               </span>
-              <span className="text-center mx-10">
-                Tu contribución nos ayudará a comprar los artefactos para
-                nuestro nuevo hogar.
+              <span className="text-center font-semibold text-lg text-gray-950 mx-5">
+                Lo siguiente es hacer la transferencia desde tu cuenta bancaria.
               </span>
             </DrawerDescription>
-            <div className="flex items-center justify-center flex-col gap-2 my-4">
-              <p className="text-sm font-semibold">Alias: luzorrillo</p>
-              <p className="text-sm font-semibold">
-                CBU: 1430001713028873250016
+            <div className="flex items-center justify-center flex-col gap-2 my-4 border-2 max-md:w-80 md:w-1/2 mx-auto rounded-xl border-rose-200 py-2">
+              <p className="text-lg font-semibold">
+                Alias: <span className="text-rose-400">luzorrillo</span>
               </p>
-              <img
-                className="w-48 h-48 border border-primary rounded-lg p-2"
-                src="/qr1.png"
-                alt="QR"
-              />
+              <p className="text-lg font-semibold">
+                CBU:{" "}
+                <span className="text-rose-400">1430001713028873250016</span>
+              </p>
             </div>
             <p className="text-sm font-semibold text-center">
               Resta contribuir: ${difference}
@@ -207,7 +204,10 @@ const Articles: React.FC<ArticlesProps> = (props) => {
               ${contribution + recaudado} / ${precioObjetivo} -{" "}
               {((contribution + recaudado) / precioObjetivo) * 100}%
             </span>
-
+            <span className="text-center mx-10 text-md pt-4">
+              El boton de abajo es solo representativo, no realiza ninguna
+              transferencia.
+            </span>
             <DrawerFooter className="md:w-1/2 md:mx-auto">
               <Button
                 onClick={() => {
